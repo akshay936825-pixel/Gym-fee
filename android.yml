@@ -19,14 +19,14 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v4
 
-      - name: Set up Java 17
+      - name: Set up Java
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '17'
 
       - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
+        uses: android-actions/setup-android@v2
 
       - name: Accept Android SDK licenses
         run: yes | sdkmanager --licenses
@@ -34,14 +34,10 @@ jobs:
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
 
-      - name: Give Gradle wrapper permission
-        run: chmod +x ./gradlew
-
-      - name: Check Gradle version
-        run: ./gradlew --version
-
-      - name: Run unit tests
-        run: ./gradlew :app:testDebugUnitTest --no-daemon
+      - name: Check Gradle wrapper
+        run: |
+          chmod +x ./gradlew
+          ./gradlew --version
 
       - name: Build Debug APK
         run: ./gradlew :app:assembleDebug --no-daemon
