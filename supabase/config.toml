@@ -1,0 +1,25 @@
+# Supabase CLI config (local development). No secrets here.
+project_id = "gym-hisab"
+
+[api]
+enabled = true
+port = 54321
+schemas = ["public"]
+max_rows = 1000
+
+[db]
+port = 54322
+major_version = 15
+
+[auth]
+enabled = true
+site_url = "http://127.0.0.1:3000"
+enable_signup = true
+minimum_password_length = 8
+
+[auth.email]
+enable_signup = true
+enable_confirmations = false
+
+[functions.razorpay-webhook]
+verify_jwt = false   # called by Razorpay; authenticated by HMAC signature inside the function

@@ -1,0 +1,21 @@
+name: Database tests
+
+on:
+  push:
+    paths: ["supabase/**"]
+  pull_request:
+    paths: ["supabase/**"]
+  workflow_dispatch:
+
+jobs:
+  pgtap:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
+      - name: Start local Supabase (applies every migration)
+        run: supabase start -x storage-api,imgproxy,realtime,studio,edge-runtime,logflare,vector,mailpit
+      - name: Row Level Security + ledger tests
+        run: supabase test db

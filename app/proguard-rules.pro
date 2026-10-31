@@ -1,0 +1,5 @@
+-keepattributes *Annotation*, InnerClasses
+-dontnote kotlinx.serialization.AnnotationsKt
+-keep,includedescriptorclasses class com.gym.hisab.**$$serializer { *; }
+-keepclassmembers class com.gym.hisab.** { *** Companion; }
+-keepclasseswithmembers class com.gym.hisab.** { kotlinx.serialization.KSerializer serializer(...); }
